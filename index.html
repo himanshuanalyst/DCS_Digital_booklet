@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>डिजिटल क्रॉप सर्वेक्षण (DCS) - मध्य प्रदेश सरकार</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-seedling"></i>
+            <span>DCS डिजिटल क्रॉप सर्वेक्षण</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <span class="nav-counter"><span id="currentSection">1</span> / <span id="totalSections">16</span></span>
+            <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Back Button (visible on all pages except home) -->
+    <button class="back-btn hidden" id="backBtn">
+        <i class="fas fa-arrow-left"></i>
+        <span>वापस</span>
+    </button>
+
+    <!-- Table of Contents Modal -->
+    <div class="modal hidden" id="tocModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>विषय सूची</h3>
+                <button class="close-btn" id="closeModal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="toc-grid">
+                    <div class="toc-item" data-section="0">
+                        <i class="fas fa-home"></i>
+                        <span>मुख्य पृष्ठ</span>
+                    </div>
+                    <div class="toc-item" data-section="1">
+                        <i class="fas fa-list"></i>
+                        <span>विषय सूची</span>
+                    </div>
+                    <div class="toc-item" data-section="2">
+                        <i class="fas fa-info-circle"></i>
+                        <span>परिचय</span>
+                    </div>
+                    <div class="toc-item" data-section="3">
+                        <i class="fas fa-history"></i>
+                        <span>DCS से पहले</span>
+                    </div>
+                    <div class="toc-item" data-section="4">
+                        <i class="fas fa-route"></i>
+                        <span>विकास यात्रा</span>
+                    </div>
+                    <div class="toc-item" data-section="5">
+                        <i class="fas fa-cogs"></i>
+                        <span>तकनीकी आधार</span>
+                    </div>
+                    <div class="toc-item" data-section="6">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>प्रक्रिया प्रवाह</span>
+                    </div>
+                    <div class="toc-item" data-section="7">
+                        <i class="fas fa-users"></i>
+                        <span>हितधारक</span>
+                    </div>
+                    <div class="toc-item" data-section="8">
+                        <i class="fas fa-trophy"></i>
+                        <span>उपलब्धियां</span>
+                    </div>
+                    <div class="toc-item" data-section="9">
+                        <i class="fas fa-database"></i>
+                        <span>डेटा संग्रह</span>
+                    </div>
+                    <div class="toc-item" data-section="10">
+                        <i class="fas fa-sitemap"></i>
+                        <span>डेटा इंटीग्रेशन</span>
+                    </div>
+                    <div class="toc-item" data-section="11">
+                        <i class="fas fa-rocket"></i>
+                        <span>भविष्य तकनीक</span>
+                    </div>
+                    <div class="toc-item" data-section="12">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>चुनौतियां</span>
+                    </div>
+                    <div class="toc-item" data-section="13">
+                        <i class="fas fa-chart-line"></i>
+                        <span>आर्थिक प्रभाव</span>
+                    </div>
+                    <div class="toc-item" data-section="14">
+                        <i class="fas fa-star"></i>
+                        <span>सफलता कहानियां</span>
+                    </div>
+                    <div class="toc-item" data-section="15">
+                        <i class="fas fa-phone"></i>
+                        <span>संपर्क जानकारी</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Section 0: Home Page -->
+        <section class="section active front-page">
+            <!-- Government Header with Logo -->
+            <div class="government-header">
+                <div class="gov-logo">
+                    <img src="images/mp-gov-logo.png" alt="Madhya Pradesh Government Logo" class="gov-logo-img">
+                </div>
+                <div class="title-section">
+                    <h1 class="main-title">डिजिटल क्रॉप सर्वेक्षण</h1>
+                    <p class="subtitle">मध्यप्रदेश शासन, राजस्व विभाग</p>
+                </div>
+            </div>
+
+            <!-- MP Map -->
+            <div class="mp-map">
+                <img src="images/mp_map.png" alt="मध्य प्रदेश का नक्शा">
+            </div>
+
+            <!-- Vision Mission -->
+            <div class="vision-mission">
+                <div class="vision-box">
+                    <h3><i class="fas fa-eye"></i> दृष्टि (Vision)</h3>
+                    <p>मध्य प्रदेश में उन्नत डिजिटल तकनीकों का लाभ उठाकर एक पारदर्शी, सटीक और किसान-केंद्रित फसल-निगरानी पारिस्थितिकी तंत्र स्थापित करना।</p>
+                </div>
+                <div class="mission-box">
+                    <h3><i class="fas fa-bullseye"></i> मिशन (Mission)</h3>
+                    <p>सटीक मैपिंग, प्रौद्योगिकी एकीकरण, हितधारक सहभागिता, पारदर्शी शासन और क्षमता निर्माण के माध्यम से डिजिटल कृषि को बढ़ावा देना।</p>
+                </div>
+            </div>
+
+            <!-- Print Button -->
+            <div class="print-section">
+                <button class="print-btn" id="printBtn">
+                    <i class="fas fa-print"></i>
+                    <span>पूरी बुकलेट प्रिंट करें</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Section 1: Table of Contents -->
+        <section class="section toc-section">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">विषय सूची</h2>
+                    <p class="section-subtitle">डिजिटल क्रॉप सर्वेक्षण की संपूर्ण जानकारी</p>
+                </div>
+
+                <div class="toc-visual-grid">
+                    <div class="toc-visual-item" data-section="0">
+                        <div class="toc-visual-icon"><i class="fas fa-home"></i></div>
+                        <h3>मुख्य पृष्ठ</h3>
+                        <p>परिचय और विज़न-मिशन</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="2">
+                        <div class="toc-visual-icon"><i class="fas fa-info-circle"></i></div>
+                        <h3>परिचय</h3>
+                        <p>DCS क्या है और क्यों जरूरी</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="3">
+                        <div class="toc-visual-icon"><i class="fas fa-history"></i></div>
+                        <h3>DCS से पहले</h3>
+                        <p>पारंपरिक समस्याएं और चुनौतियां</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="4">
+                        <div class="toc-visual-icon"><i class="fas fa-route"></i></div>
+                        <h3>विकास यात्रा</h3>
+                        <p>2017 से अब तक का सफर</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="5">
+                        <div class="toc-visual-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>तकनीकी आधार</h3>
+                        <p>SAARA, AI/ML, सैटेलाइट तकनीक</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="6">
+                        <div class="toc-visual-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h3>प्रक्रिया प्रवाह</h3>
+                        <p>कैसे काम करता है DCS</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="7">
+                        <div class="toc-visual-icon"><i class="fas fa-users"></i></div>
+                        <h3>हितधारक</h3>
+                        <p>युवा, किसान, अधिकारी</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="8">
+                        <div class="toc-visual-icon"><i class="fas fa-trophy"></i></div>
+                        <h3>उपलब्धियां</h3>
+                        <p>4.72 करोड़ फार्मर ID, नई फसलें</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="9">
+                        <div class="toc-visual-icon"><i class="fas fa-database"></i></div>
+                        <h3>डेटा संग्रह</h3>
+                        <p>डेटा कैसे इकट्ठा और उपयोग</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="10">
+                        <div class="toc-visual-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>भविष्य तकनीक</h3>
+                        <p>ड्रोन, IoT, ब्लॉकचेन, 5G</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="11">
+                        <div class="toc-visual-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>चुनौतियां</h3>
+                        <p>समस्याएं और समाधान</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="12">
+                        <div class="toc-visual-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>आर्थिक प्रभाव</h3>
+                        <p>बजट, SCA, रोजगार सृजन</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="13">
+                        <div class="toc-visual-icon"><i class="fas fa-star"></i></div>
+                        <h3>सफलता कहानियां</h3>
+                        <p>किसानों और युवाओं पर प्रभाव</p>
+                    </div>
+                    <div class="toc-visual-item" data-section="14">
+                        <div class="toc-visual-icon"><i class="fas fa-phone"></i></div>
+                        <h3>संपर्क जानकारी</h3>
+                        <p>हेल्पलाइन, पोर्टल, सपोर्ट</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Introduction -->
+        <section class="section">
+            <div class="intro-container">
+                <h1 class="section-title">डिजिटल क्रॉप सर्वेक्षण (DCS) - परिचय</h1>
+                <h2 class="section-subtitle">भारत की पहली AI-आधारित फसल निगरानी प्रणाली</h2>
+        
+                <div class="intro-content">
+                    <div class="intro-text">
+                        <h3>DCS क्या है?</h3>
+                        <p>डिजिटल क्रॉप सर्वेक्षण (DCS) एक क्रांतिकारी पहल है जो पारंपरिक फसल सर्वेक्षण पद्धति को डिजिटल तकनीक से बदलती है। यह स्थानीय युवाओं द्वारा <strong>SAARA मोबाइल ऐप</strong> के माध्यम से, <strong>पार्सल-स्तरीय जियो-फेंसिंग</strong> और <strong>अनिवार्य फसल फोटोग्राफी</strong> के साथ सटीक फसल डेटा एकत्र करने का सिस्टम है।</p>
+                    </div>
+                    <div class="intro-image">
+                        <img src="images/what-is-dcs.jpg" alt="DCS Survey">
+                    </div>
+                </div>
+        
+                <div class="importance-section">
+                    <h3>महत्व और आवश्यकता</h3>
+                    <div class="importance-grid">
+                        
+                        <div class="feature-card" style="background-image: url('images/transparency.jpg');">
+                            <div class="card-overlay">
+                                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                                <h4>पारदर्शिता</h4>
+                                <p>यह प्रणाली प्राकृतिक आपदा की स्थिति में राहत और फसल बीमा दावों के लिए पूरी तरह से प्रमाणित और विश्वसनीय डेटा सुनिश्चित करती है।</p>
+                            </div>
+                        </div>
+        
+                        <div class="feature-card" style="background-image: url('images/accuracy.jpg');">
+                            <div class="card-overlay">
+                                <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                                <h4>सटीकता</h4>
+                                <p>हर खेत की 100% पार्सल-स्तरीय मैपिंग के माध्यम से फसलों की सटीक और सत्यतापूर्ण पहचान की जाती है।</p>
+                            </div>
+                        </div>
+        
+                        <div class="feature-card" style="background-image: url('images/speed.jpg');">
+                            <div class="card-overlay">
+                                <div class="card-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <h4>तीव्रता</h4>
+                                <p>फसल डेटा का तुरंत सत्यापन होने से किसानों को बीमा दावों का भुगतान शीघ्रता से मिलता है और KCC भी तेजी से जारी होती है।</p>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Before DCS -->
+        <section class="section">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">DCS से पहले की स्थिति</h2>
+                    <p class="section-subtitle">पारंपरिक फसल सर्वेक्षण की मुख्य समस्याएं</p>
+                </div>
+            
+                <div class="problems-grid">
+                    
+                    <div class="problem-card">
+                        <div class="problem-image">
+                            <img src="images/manual-work.jpg" alt="मैन्युअल कागजी कार्य">
+                        </div>
+                        <div class="problem-content">
+                            <div class="problem-icon"><i class="fas fa-pen-alt"></i></div>
+                            <h3 class="problem-title">मैन्युअल प्रक्रिया</h3>
+                            <p class="problem-description">पटवारी द्वारा रजिस्टर में हाथ से एंट्री, जिसमें मानवीय त्रुटियों और डेटा खोने का खतरा हमेशा बना रहता था।</p>
+                        </div>
+                    </div>
+            
+                    <div class="problem-card">
+                        <div class="problem-image">
+                            <img src="images/inaccuracy.jpg" alt="गलत डेटा और नक्शे">
+                        </div>
+                        <div class="problem-content">
+                            <div class="problem-icon"><i class="fas fa-times-circle"></i></div>
+                            <h3 class="problem-title">मानकीकृत सत्यापन की कमी</h3>
+                            <p class="problem-description">पहले की प्रणाली में, दर्ज किए गए आंकड़ों की जमीनी स्तर पर पुष्टि के लिए कोई मानकी-कृत या साक्ष्य-आधारित प्रक्रिया नहीं थी, जिससे डेटा की सटीकता में भिन्नता की संभावना बनी रहती थी।</p>
+                        </div>
+                    </div>
+            
+                    <div class="problem-card">
+                        <div class="problem-image">
+                            <img src="images/delay.jpg" alt="समय की बर्बादी">
+                        </div>
+                        <div class="problem-content">
+                            <div class="problem-icon"><i class="fas fa-clock"></i></div>
+                            <h3 class="problem-title">अत्यधिक विलंब</h3>
+                            <p class="problem-description">डेटा को इकट्ठा करने और प्रोसेस करने में महीनों लग जाते थे, जिससे किसानों को योजनाओं का लाभ समय पर नहीं मिलता था।</p>
+                        </div>
+                    </div>
+            
+                    <div class="problem-card">
+                        <div class="problem-image">
+                            <img src="images/lack-of-transparency.jpg" alt="गैर-पारदर्शी प्रक्रिया">
+                        </div>
+                        <div class="problem-content">
+                            <div class="problem-icon"><i class="fas fa-eye-slash"></i></div>
+                            <h3 class="problem-title">सीमित हितधारक दृश्यता</h3>
+                            <p class="problem-description">सर्वेक्षण की प्रक्रिया एक सीमित दायरे में कार्य करती थी, जिसमें हितधारकों (विशेषकर किसानों) के लिए डेटा को वास्तविक समय में देखने या सत्यापित करने की कोई सीधी सुविधा उपलब्ध नहीं थी।</p>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Development Journey -->
+        <section class="section" data-section="4">
+            <div class="journey-infographic-container">
+                <div class="section-header">
+                    <h2 class="section-title">DCS की विकास यात्रा</h2>
+                    <p class="section-subtitle">2017 से भविष्य तक का डिजिटल रूपांतरण</p>
+                </div>
+            
+                <div class="infographic-timeline">
+                    <div class="timeline-point point-1">
+                        <div class="timeline-card card-top">
+                            <img src="images/before2017.png" alt="मैन्युअल सर्वेक्षण">
+                            <p>पटवारियों द्वारा मैन्युअल फसल सर्वेक्षण</p>
+                        </div>
+                        <div class="timeline-year-label">2017 से पहले</div>
+                    </div>
+            
+                    <div class="timeline-point point-2">
+                        <div class="timeline-card card-bottom">
+                            <img src="images/2017.png" alt="मोबाइल ऐप्स">
+                            <p>फसल सर्वे के लिए मोबाइल ऐप्स की शुरुआत</p>
+                        </div>
+                        <div class="timeline-year-label">2017</div>
+                    </div>
+            
+                    <div class="timeline-point point-3">
+                        <div class="timeline-card card-top">
+                            <img src="images/2018.png" alt="भू-अभिलेख एकीकरण">
+                            <p>भू-अभिलेखों के साथ एकीकरण</p>
+                        </div>
+                        <div class="timeline-year-label">2018</div>
+                    </div>
+            
+                    <div class="timeline-point point-4">
+                        <div class="timeline-card card-bottom">
+                            <img src="images/2020.png" alt="WebGIS पोर्टल">
+                            <p>फसल एंट्री के लिए WebGIS पोर्टल</p>
+                        </div>
+                        <div class="timeline-year-label">2020</div>
+                    </div>
+            
+                    <div class="timeline-point point-5">
+                        <div class="timeline-card card-top">
+                            <img src="images/2023.png" alt="पायलट प्रोजेक्ट">
+                            <p>डिजिटल क्रॉप सर्वे पायलट प्रोजेक्ट</p>
+                        </div>
+                        <div class="timeline-year-label">2023</div>
+                    </div>
+                    
+                    <div class="timeline-point point-6">
+                        <div class="timeline-card card-bottom">
+                            <img src="images/2024.png" alt="पूर्ण रोलआउट">
+                            <p>सभी जिलों में पूर्ण रोलआउट</p>
+                        </div>
+                        <div class="timeline-year-label">2024</div>
+                    </div>
+            
+                    <div class="timeline-point point-7">
+                        <div class="timeline-card card-top">
+                            <img src="images/2025.png" alt="AI/ML एकीकरण">
+                            <p>AI/ML एकीकरण और संवर्धन</p>
+                        </div>
+                        <div class="timeline-year-label">2025</div>
+                    </div>
+            
+                    <div class="timeline-point point-8">
+                        <div class="timeline-card card-bottom">
+                            <img src="images/2026.png" alt="ड्रोन एनालिटिक्स">
+                            <p>ड्रोन एनालिटिक्स एकीकरण</p>
+                        </div>
+                        <div class="timeline-year-label">2026 (भविष्य)</div>
+                    </div>
+                    
+                    <div class="timeline-point point-9">
+                        <div class="timeline-card card-top">
+                            <img src="images/2030.png" alt="वैश्विक मानक">
+                                <p>वैश्विक मानकों की प्राप्ति</p>
+                        </div>
+                        <div class="timeline-year-label">2030 (भविष्य)</div>
+                    </div>
+                </div>
+            </div>
+          </section>
+          
+        <!-- Continue with remaining sections... -->
+        <!-- For brevity, I'll create the remaining sections in a simplified format -->
+
+        <!-- Section 5: Technology Base -->
+        <section class="section" data-section="5">
+            <div class="tech-page-layout">
+                <div class="tech-page-title">
+                    <h1 class="section-title">तकनीकी आधार</h1>
+                    <p class="section-subtitle">
+                        डिजिटल क्रॉप सर्वेक्षण को सफल बनाने वाली मुख्य प्रौद्योगिकियाँ, जो सटीकता, गति और पारदर्शिता सुनिश्चित करती हैं।
+                    </p>
+                </div>
+            
+                <div class="tech-stack-container">
+                    <div class="tech-stack-center">
+                        <h2>प्रौद्योगिकी<br>स्टैक</h2>
+                    </div>
+                
+                    <div class="tech-stack-orbit">
+                        
+                        <div class="tech-item item-1">
+                            <div class="tech-item-content">
+                                <img src="images/saara-app.png" alt="SAARA Mobile App">
+                                <div class="tech-item-text">
+                                    <strong>SAARA App</strong>
+                                    <span>मोबाइल सर्वेक्षण अनुप्रयोग</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="tech-item item-2">
+                            <div class="tech-item-content">
+                                <img src="images/mp-kisan.png" alt="MP Kisan App">
+                                <div class="tech-item-text">
+                                    <strong>MP Kisan App</strong>
+                                    <span>किसान सहायता मंच</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="tech-item item-3">
+                            <div class="tech-item-content">
+                                <img src="images/ai-ml.png" alt="AI/ML Integration">
+                                <div class="tech-item-text">
+                                    <strong>AI/ML Integration</strong>
+                                    <span>बुद्धिमान डेटा विश्लेषण</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="tech-item item-4">
+                            <div class="tech-item-content">
+                                <img src="images/satellite.png" alt="Satellite Imagery">
+                                <div class="tech-item-text">
+                                    <strong>Satellite Imagery</strong>
+                                    <span>उपग्रह आधारित निगरानी</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="tech-item item-5">
+                            <div class="tech-item-content">
+                                <img src="images/geofencing.png" alt="Geo-fencing">
+                                <div class="tech-item-text">
+                                    <strong>Geo-fencing</strong>
+                                    <span>भौगोलिक सीमा निर्धारण</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="tech-item item-6">
+                            <div class="tech-item-content">
+                                <img src="images/gps.png" alt="GPS Tracking">
+                                <div class="tech-item-text">
+                                    <strong>GPS Tracking</strong>
+                                    <span>सटीक स्थान निर्धारण</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="tech-item item-7">
+                            <div class="tech-item-content">
+                                <img src="images/cloud.png" alt="Cloud Computing">
+                                <div class="tech-item-text">
+                                    <strong>Cloud Computing</strong>
+                                    <span>स्केलेबल डेटा भंडारण</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="tech-item item-8">
+                            <div class="tech-item-content">
+                                <img src="images/analytics.png" alt="Data Analytics">
+                                <div class="tech-item-text">
+                                    <strong>Data Analytics</strong>
+                                    <span>उन्नत डेटा विश्लेषण</span>
+                                </div>
+                            </div>
+                        </div>
+            
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Process Flow -->
+        <section class="section" data-section="6">
+            <div class="container">
+              <h1 class="section-title">प्रक्रिया प्रवाह</h1>
+              <h2 class="section-subtitle">DCS कैसे काम करता है</h2>
+              <div class="flowchart">
+                <div class="flow-item">
+                  <img src="images/panjiyan.jpg" alt="स्थानीय युवा पंजीकरण" class="flow-image">
+                  <div class="flow-content">
+                    <h3 class="flow-title">स्थानीय युवा पंजीकरण</h3>
+                    <p>स्थानीय युवाओं का SAARA पोर्टल पर पंजीकरण, पहचान सत्यापन के साथ।</p>
+                  </div>
+                </div>
+                <div class="flow-item">
+                  <img src="images/sara-app.png" alt="प्रशिक्षण" class="flow-image">
+                  <div class="flow-content">
+                    <h3 class="flow-title">प्रशिक्षण</h3>
+                    <p>पंजीकृत युवाओं को सर्वेक्षण तकनीकों और SAARA ऐप के उपयोग का प्रशिक्षण।</p>
+                  </div>
+                </div>
+                <div class="flow-item">
+                  <img src="images/digital-crop-survey.png" alt="फील्ड सर्वेक्षण" class="flow-image">
+                  <div class="flow-content">
+                    <h3 class="flow-title">फील्ड सर्वेक्षण</h3>
+                    <p>जियो-टैगिंग और फोटोग्राफी के साथ खेतों में फसल डेटा संग्रह।</p>
+                  </div>
+                </div>
+                <div class="flow-item">
+                  <img src="images/data_upload.png" alt="डेटा अपलोड" class="flow-image">
+                  <div class="flow-content">
+                    <h3 class="flow-title">डेटा अपलोड</h3>
+                    <p>SAARA ऐप के माध्यम से एकत्रित डेटा को सुरक्षित सर्वर पर अपलोड करना।</p>
+                  </div>
+                </div>
+                <div class="flow-item">
+                  <img src="images/ai_ml_checking.png" alt="AI/ML सत्यापन" class="flow-image">
+                  <div class="flow-content">
+                    <h3 class="flow-title">AI/ML सत्यापन</h3>
+                    <p>फोटो और सैटेलाइट डेटा का AI/ML द्वारा विश्लेषण और सत्यापन।</p>
+                  </div>
+                </div>
+                <div class="flow-item">
+                  <img src="images/aproval.png" alt="अनुमोदन" class="flow-image">
+                  <div class="flow-content">
+                    <h3 class="flow-title">अनुमोदन</h3>
+                    <p>सत्यापित डेटा का अधिकारियों द्वारा अनुमोदन और सरकारी योजनाओं में उपयोग।</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        <!-- Section 7: Stakeholders -->
+        <section class="section" data-section="7">
+            <div class="stakeholder-container-v2">
+                <div class="section-header">
+                    <h2 class="section-title">DCS इकोसिस्टम के हितधारक</h2>
+                    <p class="section-subtitle">डिजिटल क्रॉप सर्वे एक संपूर्ण इकोसिस्टम है जो कृषि से जुड़े हर वर्ग को सशक्त बनाता है।</p>
+                </div>
+            
+                <div class="stakeholder-grid-v2">
+                    
+                    <div class="stakeholder-card-v2">
+                        <img src="images/youth-surveyor.png" alt="स्थानीय युवा">
+                        <div class="content">
+                            <h3>स्थानीय युवा</h3>
+                            <ul>
+                                <li><i class="fas fa-briefcase"></i> 70,000+ युवाओं को आय का अवसर</li>
+                                <li><i class="fas fa-laptop-code"></i> डिजिटल कौशल का विकास</li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="stakeholder-card-v2">
+                        <img src="images/happy-farmer.png" alt="किसान">
+                        <div class="content">
+                            <h3>किसान</h3>
+                            <ul>
+                                <li><i class="fas fa-mobile-alt"></i> MP Kisan App से स्व-घोषणा की सुविधा</li>
+                                <li><i class="fas fa-shield-alt"></i> फसल बीमा और KCC में पारदर्शिता</li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="stakeholder-card-v2">
+                        <img src="images/govt-official.png" alt="सरकारी अधिकारी">
+                        <div class="content">
+                            <h3>सरकारी अधिकारी</h3>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> जमीनी स्तर पर डेटा का सटीक सत्यापन</li>
+                                <li><i class="fas fa-chart-bar"></i> साक्ष्य-आधारित निर्णय लेने में सहायता</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="stakeholder-card-v2">
+                        <img src="images/insurance.png" alt="फसल बीमा कंपनियाँ">
+                        <div class="content">
+                            <h3>फसल बीमा कंपनियाँ</h3>
+                            <ul>
+                                <li><i class="fas fa-file-invoice-dollar"></i> दावों का सटीक और तीव्र निपटान</li>
+                                <li><i class="fas fa-user-shield"></i> धोखाधड़ी रोकने में मदद</li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="stakeholder-card-v2">
+                        <img src="images/bank.png" alt="बैंक">
+                        <div class="content">
+                            <h3>बैंक और वित्तीय संस्थान</h3>
+                            <ul>
+                                <li><i class="fas fa-credit-card"></i> KCC और ऋण प्रक्रिया में तेजी</li>
+                                <li><i class="fas fa-chart-line"></i> ऋण जोखिम (Risk) का बेहतर आकलन</li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="stakeholder-card-v2">
+                        <img src="images/research.png" alt="कृषि वैज्ञानिक">
+                        <div class="content">
+                            <h3>कृषि वैज्ञानिक और शोध संस्थान</h3>
+                            <ul>
+                                <li><i class="fas fa-flask"></i> फसल पैटर्न के अध्ययन के लिए सटीक डेटा</li>
+                                <li><i class="fas fa-seedling"></i> नई किस्मों के विकास में सहायक</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="stakeholder-card-v2">
+                        <img src="images/agritech.png" alt="एग्री-टेक कंपनियाँ">
+                        <div class="content">
+                            <h3>एग्री-टेक कंपनियाँ</h3>
+                            <ul>
+                                <li><i class="fas fa-robot"></i> नए कृषि समाधान बनाने का आधार</li>
+                                <li><i class="fas fa-cogs"></i> किसानों के लिए नवाचार में मदद</li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="stakeholder-card-v2">
+                        <img src="images/industry.png" alt="खाद्य उद्योग">
+                        <div class="content">
+                            <h3>खाद्य प्रसंस्करण उद्योग</h3>
+                            <ul>
+                                <li><i class="fas fa-industry"></i> कच्चे माल की उपलब्धता का पूर्वानुमान</li>
+                                <li><i class="fas fa-truck"></i> आपूर्ति श्रृंखला (Supply Chain) का बेहतर प्रबंधन</li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Achievements -->
+        <section class="section" data-section="8">
+            <div class="achievements-container-v2">
+                <div class="section-header">
+                    <h2 class="section-title">DCS की प्रमुख उपलब्धियां</h2>
+                    <p class="section-subtitle">आँकड़े जो DCS की सफलता और कृषि क्षेत्र में इसके सकारात्मक प्रभाव को दर्शाते हैं।</p>
+                </div>
+            
+                <div class="contribution-bar">
+                    <div class="bar-icon"><i class="fas fa-chart-pie"></i></div>
+                    <p>राष्ट्रीय कृषि GVA में मध्य प्रदेश का योगदान</p>
+                    <span class="bar-number">~8.8%</span>
+                </div>
+            
+                <div class="achievements-grid-v2">
+                    
+                    <div class="stat-card-v3">
+                        <div class="stat-icon"><i class="fas fa-rupee-sign"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-value="594.92">594.92</span>
+                            <span class="stat-unit">करोड़</span>
+                        </div>
+                        <p class="stat-label">SCA प्रोत्साहन राशि (2024-25)</p>
+                    </div>
+            
+                    <div class="stat-card-v3">
+                        <div class="stat-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-value="207">207</span>
+                        </div>
+                        <p class="stat-label">नई फसल किस्मों की पहचान</p>
+                    </div>
+            
+                    <div class="stat-card-v3">
+                        <div class="stat-icon"><i class="fas fa-arrow-down"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-value="1.2">1.2</span>
+                            <span class="stat-unit">% कमी</span>
+                        </div>
+                        <p class="stat-label">e-उपार्जन में डुप्लीकेट पंजीकरण में</p>
+                    </div>
+                    
+                    <div class="stat-card-v3">
+                        <div class="stat-icon"><i class="fas fa-gavel"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-value="2">2</span>
+                             <span class="stat-unit">% कमी</span>
+                        </div>
+                        <p class="stat-label">किसानों के झूठे आपत्ति दावों में</p>
+                    </div>
+                    
+                    <div class="stat-card-v3">
+                        <div class="stat-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-value="0.5">0.5</span>
+                            <span class="stat-unit">%</span>
+                        </div>
+                        <p class="stat-label">डायवर्टेड भूमि की सटीक पहचान</p>
+                    </div>
+            
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Data Collection -->
+        <section class="section">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">डेटा संग्रह और उपयोग</h2>
+                    <p class="section-subtitle">27 सरकारी योजनाओं में एकीकरण</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-content">
+                        <p>PM Kisan, फसल बीमा, e-उपार्जन, किसान क्रेडिट कार्ड में डेटा का उपयोग</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 10: Data Integration -->
+        <section class="section" data-section="10">
+            <div class="integration-container">
+                <div class="section-header">
+                    <h2 class="section-title">DCS डेटा का एकीकरण और उपयोग</h2>
+                    <p class="section-subtitle">कैसे DCS से मिला डेटा मध्य प्रदेश के विभिन्न विभागों को निर्णय लेने और योजना बनाने में सशक्त बनाता है।</p>
+                </div>
+        
+                <div class="integration-layout">
+                    <div class="data-hub">
+                        <div class="hub-icon"><i class="fas fa-database"></i></div>
+                        <h3>DCS<br>डेटा हब</h3>
+                        <p>एकल, सत्यनिष्ठ स्रोत</p>
+                    </div>
+        
+                    <div class="departments-grid">
+                        
+                        <div class="dept-card">
+                            <div class="dept-image" style="background-image: url('images/dept-agriculture.png');"></div>
+                            <div class="dept-content">
+                                <div class="dept-icon"><i class="fas fa-leaf"></i></div>
+                                <h4>कृषि विभाग</h4>
+                                <p>फसल विविधीकरण, उत्पादन अनुमान और कृषि योजनाओं (जैसे PM Kisan) के सटीक लक्ष्यीकरण के लिए।</p>
+                            </div>
+                        </div>
+        
+                        <div class="dept-card">
+                            <div class="dept-image" style="background-image: url('images/dept-revenue.png');"></div>
+                            <div class="dept-content">
+                                <div class="dept-icon"><i class="fas fa-map-marked-alt"></i></div>
+                                <h4>राजस्व विभाग</h4>
+                                <p>भू-अभिलेखों को अपडेट करने, फसल हानि का त्वरित आकलन करने और आपदा राहत प्रदान करने के लिए।</p>
+                            </div>
+                        </div>
+        
+                        <div class="dept-card">
+                            <div class="dept-image" style="background-image: url('images/dept-food.png');"></div>
+                            <div class="dept-content">
+                                <div class="dept-icon"><i class="fas fa-warehouse"></i></div>
+                                <h4>खाद्य एवं नागरिक आपूर्ति</h4>
+                                <p>e-उपार्जन (न्यूनतम समर्थन मूल्य पर खरीद) की योजना बनाने और लॉजिस्टिक्स को अनुकूलित करने के लिए।</p>
+                            </div>
+                        </div>
+        
+                        <div class="dept-card">
+                            <div class="dept-image" style="background-image: url('images/dept-planning.png');"></div>
+                            <div class="dept-content">
+                                <div class="dept-icon"><i class="fas fa-chart-pie"></i></div>
+                                <h4>वित्त एवं योजना विभाग</h4>
+                                <p>कृषि क्षेत्र के लिए बजट आवंटित करने, आर्थिक सर्वेक्षण तैयार करने और डेटा-संचालित नीतियां बनाने के लिए।</p>
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        <!-- Section 10: Future Technology -->
+        <section class="section">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">भविष्य की तकनीक</h2>
+                    <p class="section-subtitle">ड्रोन, IoT, ब्लॉकचेन, 5G</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-drone"></i></div>
+                            <h3 class="card-title">ड्रोन एनालिटिक्स</h3>
+                        </div>
+                        <div class="card-content">
+                            <p>फसल स्वास्थ्य मॉनिटरिंग, रियल-टाइम निगरानी</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-cubes"></i></div>
+                            <h3 class="card-title">ब्लॉकचेन</h3>
+                        </div>
+                        <div class="card-content">
+                            <p>सप्लाई चेन ट्रेसेबिलिटी, डेटा सिक्योरिटी</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: Challenges -->
+        <section class="section" data-section="11">
+            <div class="challenge-solution-container">
+                <div class="section-header">
+                    <h2 class="section-title">चुनौतियां और समाधान</h2>
+                    <p class="section-subtitle">हर चुनौती का सामना करने के लिए एक प्रभावी समाधान।</p>
+                </div>
+            
+                <div class="cs-layout">
+                    <div class="cs-column challenges">
+                        <h3>चुनौतियां (Challenges)</h3>
+                        
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fas fa-wifi"></i></div>
+                            <div class="cs-text">
+                                <h4>कनेक्टिविटी</h4>
+                                <p>ग्रामीण और दूरदराज के क्षेत्रों में अस्थिर या अनुपलब्ध इंटरनेट।</p>
+                            </div>
+                        </div>
+            
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fas fa-user-graduate"></i></div>
+                            <div class="cs-text">
+                                <h4>डिजिटल साक्षरता</h4>
+                                <p>स्थानीय सर्वेयरों में तकनीकी उपकरणों और ऐप्स की सीमित समझ।</p>
+                            </div>
+                        </div>
+            
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="cs-text">
+                                <h4>हार्डवेयर सीमाएं</h4>
+                                <p>सर्वेयरों के पास पुराने या कम क्षमता वाले स्मार्टफोन का होना।</p>
+                            </div>
+                        </div>
+            
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="cs-text">
+                                <h4>डेटा की गुणवत्ता</h4>
+                                <p>हजारों सर्वेयरों द्वारा एकत्र किए गए डेटा की सटीकता और विश्वसनीयता सुनिश्चित करना।</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+            
+                    <div class="cs-bridge">
+                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right"></i>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+            
+                    <div class="cs-column solutions">
+                        <h3>समाधान (Solutions)</h3>
+            
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <div class="cs-text">
+                                <h4>ऑफलाइन मोड</h4>
+                                <p>SAARA ऐप में ऑफलाइन डेटा संग्रह और बाद में सिंक करने की सुविधा।</p>
+                            </div>
+                        </div>
+            
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div class="cs-text">
+                                <h4>व्यापक प्रशिक्षण</h4>
+                                <p>स्थानीय स्तर पर वीडियो, मैनुअल और मास्टर ट्रेनर्स द्वारा प्रशिक्षण कार्यक्रम।</p>
+                            </div>
+                        </div>
+            
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fab fa-android"></i></div>
+                            <div class="cs-text">
+                                <h4>न्यूनतम आवश्यकता</h4>
+                                <p>ऐप के लिए Android 6+ की न्यूनतम आवश्यकता तय की गई, जो अधिकांश डिवाइस पर उपलब्ध है।</p>
+                            </div>
+                        </div>
+                        
+                        <div class="cs-card">
+                            <div class="cs-icon"><i class="fas fa-check-double"></i></div>
+                            <div class="cs-text">
+                                <h4>बहु-स्तरीय सत्यापन</h4>
+                                <p>पटवारी, तहसीलदार और AI/ML द्वारा डेटा का कई स्तरों पर क्रॉस-वेरिफिकेशन।</p>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 12: Economic Impact -->
+        <section class="section" data-section="12">
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">आर्थिक प्रभाव</h2>
+                    <p class="section-subtitle">बजट, SCA और रोजगार सृजन</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">1170.73 करोड़</div>
+                        <div class="stat-label">कुल SCA राशि 2024-25</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">129.41 करोड़</div>
+                        <div class="stat-label">DCS बजट</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 13: Success Stories -->
+        <section class="section success-stories-section" data-section="13">
+            <div class="container">
+                <h1 class="section-title">सफलता की कहानियां</h1>
+                <div class="success-stories-grid">
+                    <div class="story-card">
+                        <div class="profile-image">
+                            <img src="images/ram-prasad.jpg" alt="राम प्रसाद">
+                        </div>
+                        <h3>किसान सशक्तिकरण</h3>
+                        <p>"DCS के माध्यम से हमारे फसल डेटा का सटीक रिकॉर्ड रखा जाता है। अब सब्सिडी और योजनाओं का लाभ समय पर मिलता है।"</p>
+                        <span class="story-author">- राम प्रसाद, किसान, सिवनी</span>
+                    </div>
+                    <div class="story-card">
+                        <div class="profile-image">
+                            <img src="images/sunita-sharma.jpg" alt="सुनीता शर्मा">
+                        </div>
+                        <h3>युवा रोजगार</h3>
+                        <p>"मैंने DCS सर्वेयर के रूप में काम शुरू किया। अब मुझे अच्छी आय मिलती है और अपने गांव की सेवा करने का मौका भी।"</p>
+                        <span class="story-author">- सुनीता शर्मा, सर्वेयर, नीमच</span>
+                    </div>
+                    <div class="story-card">
+                        <div class="profile-image">
+                            <img src="images/anil-kumar.jpg" alt="डॉ. अनिल कुमार">
+                        </div>
+                        <h3>नई फसलों की पहचान</h3>
+                        <p>"DCS की मदद से 207 नई फसल किस्मों की पहचान हुई है। यह कृषि विविधीकरण में बहुत महत्वपूर्ण है।"</p>
+                        <span class="story-author">- डॉ. अनिल कुमार, कृषि विशेषज्ञ</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 14: Contact Information -->
+        <section class="section" data-section="14">
+            <div class="container">
+              <h1 class="section-title">संपर्क</h1>
+              <h2 class="section-subtitle">हमसे संपर्क करें</h2>
+              <div class="contact-container">
+                <div class="contact-info">
+                  <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <h3 class="contact-title">हेल्पलाइन</h3>
+                    <p class="contact-detail">1800-XXX-XXXX</p>
+                  </div>
+                  <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <h3 class="contact-title">ईमेल</h3>
+                    <p class="contact-detail">support@dcs.mp.gov.in</p>
+                  </div>
+                  <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3 class="contact-title">पता</h3>
+                    <p class="contact-detail">मध्य प्रदेश सरकार, भोपाल, मध्य प्रदेश, भारत</p>
+                  </div>
+                  <div class="contact-card">
+                    <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3 class="contact-title">व्हाट्सएप</h3>
+                    <p class="contact-detail">+91-XXX-XXX-XXXX</p>
+                  </div>
+                  <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="contact-map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3668.573489831593!2d77.416667!3d23.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c428f0f1ac7a7%3A0x9e6c6f7f7e5e1c!2sBhopal%2C%20Madhya%20Pradesh%2C%20India!5e0!3m2!1sen!2sin!4v1691487234567!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
