@@ -1,0 +1,2297 @@
+/* ==========================================================================
+   1. ROOT VARIABLES (Global Colors & Sizes)
+   ========================================================================== */
+   :root {
+    /* Color tokens for DCS Booklet */
+    --primary-green: #1B5E20;
+    --primary-gold: #FFB300;
+    --accent-green: #4CAF50;
+    --accent-gold: #FFA726;
+    --text-dark: #212121;
+    --text-light: #757575;
+    --surface-white: #FFFFFF;
+    --surface-light: #FAFAFA;
+    --border-light: #E0E0E0;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.2);
+    --radius-md: 8px;
+    --font-size-base: 14px;
+  }
+  
+  /* ==========================================================================
+     2. BASE & RESET STYLES (Basic Setup)
+     ========================================================================== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: var(--surface-light);
+    overflow-x: hidden;
+  }
+  
+  /* ==========================================================================
+     3. NAVIGATION & HEADER (Top Bar, Buttons, Progress Bar)
+     ========================================================================== */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: var(--surface-white);
+    border-bottom: 2px solid var(--primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 1000;
+    box-shadow: 0 2px 10px var(--shadow-light);
+  }
+  
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-green);
+  }
+  
+  .nav-brand i {
+    font-size: 1.5rem;
+    color: var(--accent-green);
+  }
+  
+  .nav-controls {
+    display: flex;
+    align-items: center; /* आइटम्स को वर्टिकली सेंटर में रखने के लिए */
+    gap: 1rem;
+    margin-right: 15%; /* <<< यह लाइन जोड़ें */
+  }
+  
+  .nav-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+  
+  .nav-btn:hover {
+    background: var(--accent-green);
+    transform: scale(1.1);
+  }
+  
+  .nav-btn:disabled {
+    background: #BDBDBD;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .nav-counter {
+    font-weight: 600;
+    color: var(--text-dark);
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .menu-btn {
+    background: var(--primary-gold);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-btn:hover {
+    background: var(--accent-gold);
+    transform: translateY(-2px);
+  }
+  
+  .progress-bar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--border-light);
+    z-index: 999;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-green), var(--primary-gold));
+    width: 0;
+    transition: width 0.5s ease;
+  }
+  
+  /* ==========================================================================
+     4. MODAL (Table of Contents Popup)
+     ========================================================================== */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .modal-content {
+    background: white;
+    border-radius: 15px;
+    max-width: 900px;
+    max-height: 80vh;
+    width: 90%;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+  
+  .modal.hidden .modal-content {
+    transform: scale(0.9);
+  }
+  
+  .modal-header {
+    background: var(--primary-green);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px 15px 0 0;
+  }
+  
+  .modal-header h3 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+  
+  .close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .modal-body {
+    padding: 2rem;
+  }
+  
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .toc-item {
+    background: var(--surface-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .toc-item:hover {
+    background: var(--primary-green);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+  }
+  
+  .toc-item i {
+    font-size: 1.5rem;
+    opacity: 0.8;
+  }
+  
+  .toc-item span {
+    font-weight: 500;
+  }
+  
+  
+  /* ==========================================================================
+     5. GENERAL LAYOUT & COMPONENTS (Styles for all pages)
+     ========================================================================== */
+  .main-content {
+    margin-top: 74px;
+    min-height: calc(100vh - 74px);
+    position: relative;
+  }
+  
+  .section {
+    height: calc(100vh - 74px); /* बदला गया: min-height को height किया */
+    width: 100%;
+    padding: clamp(1rem, 3vmin, 2rem); /* बदला गया: Responsive padding */
+    display: none;
+    flex-direction: column;
+    justify-content: center; /* कंटेंट को वर्टिकली सेंटर करेगा */
+    align-items: center; /* कंटेंट को हॉरिजॉन्टली सेंटर करेगा */
+    overflow: hidden; /* जोड़ा गया: यह स्क्रॉलिंग को रोकेगा */
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .section.active {
+    display: flex; /* बदला गया: block को flex किया */
+  }
+  
+  .section:not(.active) {
+    display: none !important;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .content-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+  }
+  
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Generic Card Component */
+  .content-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px var(--shadow-light);
+    transition: transform 0.3s ease;
+  }
+  
+  .content-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Generic Stats Grid Component */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+  
+  .stat-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 20px var(--shadow-light);
+    border-top: 4px solid var(--primary-green);
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+  
+  /****************************************************************************
+     PAGE-SPECIFIC STYLES START HERE
+   ****************************************************************************/
+  
+  /* ==========================================================================
+   Page 1 (Section 0): Home Page
+   ========================================================================== */
+  .section:nth-child(1) { 
+    background: linear-gradient(135deg, var(--primary-green) 0%, #2E7D32 50%, var(--primary-gold) 100%); 
+  }
+
+  .front-page {
+    color: white;
+    text-align: center;
+  }
+
+  .front-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+
+  .front-page > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .government-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-bottom: clamp(1rem, 3vh, 2rem);
+  }
+
+  .gov-logo {
+    width: clamp(60px, 12vmin, 80px); /* बदला गया: Fluid size */
+    height: clamp(60px, 12vmin, 80px); /* बदला गया: Fluid size */
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+  }
+
+  .gov-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .main-title {
+    font-size: clamp(2rem, 7vmin, 3.5rem); /* बदला गया: Fluid font size */
+    font-weight: 800;
+    margin-bottom: clamp(0.5rem, 2vh, 1rem);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 3.5vmin, 1.5rem); /* बदला गया: Fluid font size */
+    font-weight: 400;
+    margin-bottom: clamp(1.5rem, 4vh, 3rem);
+    opacity: 0.95;
+  }
+
+  .vision-mission {
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto clamp(1.5rem, 4vh, 3rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+
+  .vision-box, .mission-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: clamp(1rem, 3vmin, 1.5rem); /* बदला गया: Fluid padding */
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .vision-box h3, .mission-box h3 {
+    font-size: clamp(1.1rem, 3vmin, 1.5rem); /* बदला गया: Fluid font size */
+    margin-bottom: clamp(0.5rem, 2vmin, 1rem);
+    color: var(--primary-gold);
+  }
+
+  .vision-box p, .mission-box p {
+    font-size: clamp(0.8rem, 2.2vmin, 1rem); /* बदला गया: Fluid font size */
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  .print-section {
+    margin-top: auto; /* Pushes button towards the bottom */
+    padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  }
+
+  .print-btn {
+    background: var(--primary-gold);
+    color: white;
+    border: none;
+    padding: clamp(0.7rem, 2vmin, 1rem) clamp(1.5rem, 4vmin, 2rem);
+    border-radius: 25px;
+    font-size: clamp(0.9rem, 2.5vmin, 1.1rem); /* बदला गया: Fluid font size */
+    cursor: pointer;
+  }
+
+  /* ==========================================================================
+   Page 1 - ADDING AND POSITIONING MP MAP
+   ========================================================================== */
+
+  /* कंटेंट को सही क्रम में रखने के लिए */
+  .front-page .government-header { order: 1;margin-top: 2rem; }
+  .front-page .vision-mission { order: 2; }
+  .front-page .mp-map { order: 3; } /* नक्शे को तीसरे स्थान पर रखा */
+  .front-page .print-section { order: 4; }
+
+  /* नक्शे का स्टाइल */
+  /* नक्शे का स्टाइल - REVISED FOR TRANSPARENT IMAGE */
+  .mp-map {
+    width: 100%;
+    max-width: 350px; /* अधिकतम चौड़ाई थोड़ी बढ़ाई */
+    height: clamp(150px, 25vh, 250px); /* बदला गया: कंटेनर की ऊंचाई को कंट्रोल किया */
+    margin-top: clamp(0.5rem, 2vh, 1.5rem); /* बदला गया: मार्जिन थोड़ा कम किया */
+    margin-bottom: clamp(0.5rem, 2vh, 1.5rem); /* बदला गया: मार्जिन थोड़ा कम किया */
+  }
+
+  .mp-map img {
+    width: 100%;
+    height: 100%; /* बदला गया: कंटेनर की पूरी ऊंचाई लेगा */
+    object-fit: contain; /* बदला गया: यह इमेज को बिना काटे, दिए गए स्पेस में फिट करेगा */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  }
+  
+/* ==========================================================================
+   Page 2 (Section 1): Table of Contents
+   ========================================================================== */
+   .section:nth-child(2) { 
+    background-image: url('images/toc-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .toc-visual-grid {
+    display: grid;
+    /* बदला गया: 3 या 4 कॉलम में एडजस्ट होगा, minmax साइज को fluid किया */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: clamp(0.5rem, 1.5vmin, 1rem); /* बदला गया: Fluid gap */
+    width: 100%;
+    max-width: 1400px; /* ग्रिड को बहुत ज्यादा फैलने से रोकता है */
+    margin-top: 0; /* बदला गया: टॉप मार्जिन हटाया */
+  }
+  
+  .toc-visual-item {
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    padding: clamp(0.5rem, 2vmin, 1rem); /* बदला गया: Fluid padding */
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex; /* जोड़ा गया: फ्लेक्सबॉक्स ताकि कंटेंट बेहतर दिखे */
+    flex-direction: column; /* जोड़ा गया: फ्लेक्स डायरेक्शन */
+    justify-content: center; /* जोड़ा गया: वर्टिकल सेंटरिंग */
+  }
+  
+  .toc-visual-item:hover {
+    background: rgba(255, 255, 255, 0.2); 
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px var(--shadow-medium);
+  }
+  
+  .toc-visual-item h3 {
+    font-size: clamp(0.9rem, 2.2vmin, 1.2rem); /* बदला गया: Fluid font size */
+    margin-bottom: 0.25rem;
+    color: white; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+  }
+  
+  .toc-visual-item p {
+    color: rgba(255, 255, 255, 0.9); 
+    font-size: clamp(0.7rem, 1.8vmin, 0.85rem); /* बदला गया: Fluid font size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+    line-height: 1.3;
+  }
+  
+  .toc-visual-icon {
+    width: clamp(40px, 8vmin, 50px); /* बदला गया: Fluid size */
+    height: clamp(40px, 8vmin, 50px); /* बदला गया: Fluid size */
+    background: var(--primary-gold); 
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+    font-size: clamp(1.2rem, 3.5vmin, 1.6rem); /* बदला गया: Fluid icon size */
+  }
+  /* ==========================================================================
+   Page 2 - FIXES (Color and Spacing)
+   ========================================================================== */
+
+  /* Fix 1: Title and Subtitle color change to white */
+  .section:nth-child(2) .section-title,
+  .section:nth-child(2) .section-subtitle {
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Text ke peeche halki shadow */
+  }
+
+  /* Fix 2: Adjust padding to lift content and avoid nav overlap */
+  .section:nth-child(2) {
+    /* We keep justify-content: center (the default from .section) */
+    /* and just add more padding at the bottom to push the content up */
+    padding-top: 2rem;
+    padding-bottom: 90px; /* Bottom me extra space */
+  }
+  
+  /* ==========================================================================
+   Page 3 (Section 2): Introduction 
+    ========================================================================== */
+  .section:nth-child(3) {
+    background-color: #f5f7f5;
+    background-image: url("images/photo_grass.jpg");
+    background-repeat: repeat;
+    justify-content: center;
+  }
+
+  /* मेन कंटेनर को ग्रिड लेआउट में बदला गया */
+  .intro-container {
+    width: 100%;
+    height: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    /* बदला गया: अब तीन पंक्तियाँ (rows) हैं - टाइटल, सब-टाइटल, और कंटेंट */
+    grid-template-rows: auto auto 1fr; 
+    grid-template-columns: 1fr 1fr;
+    row-gap: clamp(1.5rem, 4vh, 1.5rem);; /* बदला गया: हेडर और सब-हेडर के बीच गैप हटाया */
+    column-gap: clamp(1rem, 2vw, 2rem);
+    padding: 0;
+  }
+
+  /* --- हेडर (टाइटल और सब-टाइटल) --- */
+  .intro-container .section-title {
+    grid-row: 1; /* पहली पंक्ति में रखें */
+    grid-column: 1 / span 2; /* दोनों कॉलम तक फैलाएं */
+    text-align: center;
+    font-size: clamp(1.8rem, 4vmin, 2.2rem);
+    color: var(--primary-green);
+    margin: 0;
+    align-self: end; /* नीचे की ओर अलाइन करें */
+  }
+  .intro-container .section-subtitle {
+    grid-row: 2; /* दूसरी पंक्ति में रखें */
+    grid-column: 1 / span 2; /* दोनों कॉलम तक फैलाएं */
+    text-align: center;
+    font-size: clamp(1rem, 2.5vmin, 1.2rem);
+    margin-bottom: clamp(1rem, 2vh, 1.5rem); /* कंटेंट से दूरी बनाने के लिए */
+    align-self: start; /* ऊपर की ओर अलाइन करें */
+  }
+
+  .intro-container .section-title {
+    font-size: clamp(1.8rem, 4vmin, 2.2rem);
+    color: var(--primary-green);
+    margin-bottom: 0.25rem; /* बदला गया: सब-हेडिंग के करीब लाने के लिए */
+  }
+
+  .intro-container .section-subtitle {
+    font-size: clamp(1rem, 2.5vmin, 1.2rem);
+    margin-bottom: 0;
+  }
+
+  /* --- लेफ्ट कॉलम: टेक्स्ट और इमेज वाला बड़ा बॉक्स --- */
+  .intro-content {
+    grid-row: 3;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(226, 221, 221, 0.85);
+    padding: clamp(1rem, 2.5vmin, 1.5rem);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .intro-text h3 {
+    font-size: clamp(1.2rem, 3vmin, 1.6rem);
+    color: var(--primary-green);
+  }
+
+  .intro-text p {
+    font-size: clamp(0.8rem, 2vmin, 0.95rem);
+    line-height: 1.5;
+  }
+
+  .intro-image {
+    width: 100%;
+    margin-top: clamp(0.5rem, 2vmin, 1rem);
+    flex-grow: 1;
+    min-height: 0;
+  }
+
+  .intro-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  /* --- राइट कॉलम: तीन वर्टिकल कार्ड्स --- */
+  .importance-section {
+    grid-row: 3;
+    grid-column: 2;
+    display: flex;
+  }
+
+  .importance-section h3 {
+    display: none;
+  }
+
+  .importance-grid {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1.5vh, 1rem);
+    flex-grow: 1;
+  }
+
+  .feature-card {
+    flex: 1;
+    border-radius: 15px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    overflow: hidden;
+  }
+
+  .card-overlay {
+    /* बदला गया: फोटो को डल करने के लिए गहरा ओवरले */
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+    padding: clamp(0.5rem, 2vmin, 1rem);
+    width: 100%;
+    height: 120%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .card-icon {
+    width: clamp(35px, 6vmin, 45px);
+    height: clamp(35px, 6vmin, 45px);
+    font-size: clamp(1.2rem, 3vmin, 1.5rem);
+    flex-shrink: 0;
+  }
+
+  .feature-card h4 {
+    font-size: clamp(1.1rem, 2.8vmin, 1.3rem);
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
+    margin-bottom: 0.25rem;
+  }
+
+  .feature-card p {
+    font-size: clamp(0.8rem, 2vmin, 0.9rem);
+    line-height: 1.3;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  }
+ 
+  /* ==========================================================================
+   Page 4 (Section 3): Before DCS - NEW 2-COLUMN LAYOUT
+   ========================================================================== */
+/* ==========================================================================
+   Page 4 (Section 3): Before DCS - NEW 4-COLUMN HORIZONTAL LAYOUT
+   ========================================================================== */
+   .section:nth-child(4) {
+    background-image: url('images/old-farming.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+   
+  .section:nth-child(4) .section-header {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: clamp(0.5rem, 2vh, 1rem); /* पैडिंग कम की */
+      border-radius: 8px;
+      margin-bottom: clamp(1rem, 3vh, 2rem);
+   }
+  
+  /* बदला गया: Grid को 4 कॉलम में बांटा */
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 बराबर कॉलम */
+    gap: clamp(0.5rem, 1.5vw, 1.5rem); /* बदला गया: रेस्पॉन्सिव गैप */
+    width: 100%;
+    max-width: 1400px;
+    align-items: stretch; /* कार्ड्स की ऊंचाई बराबर रखने के लिए */
+  }
+  
+  /* बदला गया: कार्ड का लेआउट (इमेज ऊपर, टेक्स्ट नीचे) */
+  .problem-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* बदला गया: वर्टिकल लेआउट */
+    border-left: none; 
+    border-top: 5px solid #D32F2F; /* ऊपर बॉर्डर दिया */
+    transition: transform 0.3s ease;
+  }
+  
+  .problem-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .problem-image {
+    width: 100%;
+    height: clamp(140px, 22vh, 180px); /* बदला गया: इमेज की ऊंचाई */
+    flex-shrink: 0;
+  }
+  
+  .problem-image img {
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+  }
+  
+  .problem-content {
+    padding: clamp(0.5rem, 2vmin, 1rem);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* बची हुई जगह लेगा */
+  }
+  
+  .problem-icon {
+    font-size: clamp(1.2rem, 3vmin, 1.5rem);
+    color: #D32F2F;
+    margin-bottom: 0.25rem;
+  }
+  
+  .problem-title {
+    font-size: clamp(1rem, 2.5vmin, 1.2rem);
+    color: var(--text-dark);
+  }
+  
+  .problem-description {
+    font-size: clamp(0.75rem, 1.8vmin, 0.9rem);
+    color: var(--text-light);
+    line-height: 1.4;
+    margin-top: auto; /* टाइटल को ऊपर रखने के लिए */
+  }
+  
+/* ==========================================================================
+   Page 5 (Section 4): Development Journey - REVISED TO FIT SCREEN
+   ========================================================================== */
+   .section:nth-child(5) {
+    background-image: url('images/vikash_yatra_background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* जोड़ा गया: कंटेंट को ओवरफ्लो होने से बचाने के लिए */
+    overflow: hidden; 
+  }
+  
+  .journey-infographic-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .infographic-timeline {
+    position: relative;
+    width: 100%;
+    /* बदला गया: ऊंचाई को रेस्पॉन्सिव बनाया */
+    height: clamp(350px, 55vh, 500px); 
+    margin-top: 1rem;
+  }
+  
+  .infographic-timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-green);
+    transform: translateY(-50%);
+    border-radius: 5px;
+  }
+  
+  .timeline-point {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .timeline-point::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(16px, 2vmin, 22px);
+    height: clamp(16px, 2vmin, 22px);
+    background: white;
+    border: clamp(3px, 0.5vmin, 5px) solid var(--primary-green);
+    border-radius: 50%;
+    z-index: 5;
+  }
+  
+  .timeline-card {
+    position: absolute; /* बदला गया: absolute positioning for fine control */
+    width: clamp(120px, 12vw, 180px); /* बदला गया: चौड़ाई रेस्पॉन्सिव */
+    background: white;
+    padding: clamp(0.5rem, 1.5vmin, 1rem); /* बदला गया: पैडिंग रेस्पॉन्सिव */
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .timeline-card:hover {
+      transform: scale(1.05);
+  }
+  
+  /* कनेक्टर और एरो को फिर से बनाया गया */
+  .timeline-card::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 3px;
+    height: clamp(20px, 5vh, 40px); /* बदला गया: कनेक्टर की लंबाई रेस्पॉन्सिव */
+    background: var(--primary-green);
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+  
+  .timeline-card::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+  }
+  
+  .card-top {
+    bottom: calc(50% + clamp(20px, 5vh, 40px)); /* बदला गया: दूरी रेस्पॉन्सिव */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .card-top::before {
+    top: 100%;
+  }
+  .card-top::after {
+    top: 100%;
+    border-top: 8px solid var(--primary-green);
+  }
+  
+  .card-bottom {
+    top: calc(50% + clamp(20px, 5vh, 40px)); /* बदला गया: दूरी रेस्पॉन्सिव */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .card-bottom::before {
+    bottom: 100%;
+  }
+  .card-bottom::after {
+    bottom: 100%;
+    border-bottom: 8px solid var(--primary-green);
+  }
+  
+  .timeline-card img {
+    width: 100%;
+    height: clamp(40px, 8vh, 70px); /* बदला गया: इमेज की ऊंचाई रेस्पॉन्सिव */
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-card p {
+    font-size: clamp(0.7rem, 1.5vmin, 0.85rem); /* बदला गया: फॉन्ट रेस्पॉन्सिव */
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-top: 0;
+  }
+  
+  .timeline-year-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--primary-green);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: clamp(0.7rem, 1.8vmin, 0.9rem);
+    font-weight: bold;
+    z-index: 6;
+    border: 2px solid white;
+    /*isme jo text likha hai vo center me kar diya*/
+    text-align: center;
+  }
+  
+  /* पॉइंट्स की पोजीशनिंग को थोड़ा एडजस्ट किया गया ताकि वे कटे नहीं */
+  .point-1 { left: 5%; } 
+  .point-2 { left: 16%; } 
+  .point-3 { left: 27%; } 
+  .point-4 { left: 38%; } 
+  .point-5 { left: 49%; } 
+  .point-6 { left: 60%; } 
+  .point-7 { left: 71%; } 
+  .point-8 { left: 82%; } 
+  .point-9 { left: 93%; }
+  
+  /* ==========================================================================
+   Page 6 (Section 5): Technology Base - REFINED
+   ========================================================================== */
+.section:nth-child(6) {
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/tech-background.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.tech-page-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+  gap: 2rem;
+}
+
+.tech-page-title {
+  flex: 1;
+  color: white;
+  padding-right: 2rem;
+}
+
+.tech-page-title .section-title {
+    color: white;
+    font-size: 3rem;
+    text-align: left;
+}
+
+.tech-page-title .section-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    text-align: left;
+    max-width: 450px;
+}
+
+.tech-stack-container {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tech-stack-center {
+  width: 180px;
+  height: 180px;
+  background: var(--primary-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  z-index: 10;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0,0,0,0.5);
+}
+
+.tech-stack-center h2 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.tech-stack-orbit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: spin 60s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.tech-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px;
+}
+
+.tech-item-content {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  animation: spin-reverse 60s linear infinite; 
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.tech-item-content:hover {
+  transform: scale(1.1);
+}
+
+.tech-item-content img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 8px;
+}
+
+.tech-item-text strong {
+  font-size: 0.9rem;
+  color: var(--primary-green);
+  display: block;
+}
+
+/* बदला गया: सब-टेक्स्ट का रंग गहरा किया और लाइन-हाइट एडजस्ट की */
+.tech-item-text span {
+  font-size: 0.8rem;
+  color: #333; /* बदला गया: रंग गहरा किया */
+  line-height: 1.2; /* जोड़ा गया: लाइन के बीच गैप कम किया */
+  word-break: break-all;
+}
+
+/* बदला गया: translateY की वैल्यू 250px से 225px कर दी गई है, ताकि गोले पास आ जाएं */
+.item-1 { transform: rotate(0deg)   translateY(-225px) rotate(0deg); }
+.item-2 { transform: rotate(45deg)  translateY(-225px) rotate(-45deg); }
+.item-3 { transform: rotate(90deg)  translateY(-225px) rotate(-90deg); }
+.item-4 { transform: rotate(135deg) translateY(-225px) rotate(-135deg); }
+.item-5 { transform: rotate(180deg) translateY(-225px) rotate(-180deg); }
+.item-6 { transform: rotate(225deg) translateY(-225px) rotate(-225deg); }
+.item-7 { transform: rotate(270deg) translateY(-225px) rotate(-270deg); }
+.item-8 { transform: rotate(315deg) translateY(-225px) rotate(-315deg); }
+
+/* मोबाइल के लिए रेस्पॉन्सिव डिज़ाइन */
+@media (max-width: 992px) {
+  .tech-page-layout {
+    flex-direction: column;
+  }
+  .tech-page-title {
+    padding-right: 0;
+    text-align: center;
+  }
+  .tech-page-title .section-title,
+  .tech-page-title .section-subtitle {
+      text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-stack-container {
+    width: 320px;
+    height: 320px;
+    transform: scale(1.2);
+  }
+  .tech-stack-center {
+    width: 100px;
+    height: 100px;
+  }
+  .tech-stack-center h2 {
+    font-size: 1rem;
+  }
+  .tech-item {
+    width: 90px;
+    height: 90px;
+    margin: -45px;
+  }
+  .tech-item-content img {
+    width: 30px;
+    height: 30px;
+  }
+  .tech-item-text strong { font-size: 0.6rem; }
+  .tech-item-text span { font-size: 0.5rem; }
+
+  /* बदला गया: मोबाइल के लिए भी translateY की वैल्यू कम की गई (130px से 120px) */
+  .item-1 { transform: rotate(0deg)   translateY(-120px) rotate(0deg); }
+  .item-2 { transform: rotate(45deg)  translateY(-120px) rotate(-45deg); }
+  .item-3 { transform: rotate(90deg)  translateY(-120px) rotate(-90deg); }
+  .item-4 { transform: rotate(135deg) translateY(-120px) rotate(-135deg); }
+  .item-5 { transform: rotate(180deg) translateY(-120px) rotate(-180deg); }
+  .item-6 { transform: rotate(225deg) translateY(-120px) rotate(-225deg); }
+  .item-7 { transform: rotate(270deg) translateY(-120px) rotate(-270deg); }
+  .item-8 { transform: rotate(315deg) translateY(-120px) rotate(-315deg); }
+}
+  
+  /* ==========================================================================
+     Page 7 (Section 6): Process Flow
+     ========================================================================== */
+  .section:nth-child(7) { 
+    background-image: url('images/DCS_process_page.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .section:nth-child(7) .section-title,
+  .section:nth-child(7) .section-subtitle {
+    color: white;
+    font-weight: bold;
+  }
+  
+  .flowchart {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  
+  .flow-item {
+    display: flex;
+    align-items: center;
+    background: var(--surface-white);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px var(--shadow-light);
+    width: 300px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .flow-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px var(--shadow-medium);
+  }
+  
+  .flow-item:not(:last-child)::after {
+    content: '\2192'; /* Right arrow */
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--primary-green);
+  }
+  
+  .flow-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 1rem;
+  }
+  
+  .flow-content {
+    flex: 1;
+  }
+  
+  .flow-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+  
+  .flow-content p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+  
+  /* ==========================================================================
+   Page 8 (Section 7): Stakeholders - REVISED TO FIT SCREEN
+   ========================================================================== */
+
+  .section:nth-child(8) {
+    background-image: linear-gradient(rgba(240, 242, 245, 0.92), rgba(240, 242, 245, 0.92)), url('images/stakeholders-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: clamp(1rem, 2vh, 2rem);
+    overflow-y: auto; /* Allow scrolling within this section ONLY if absolutely necessary */
+  }
+
+  .stakeholder-container-v2 {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .stakeholder-container-v2 .section-header {
+      margin-bottom: clamp(1rem, 2vh, 1.5rem); /* बदला गया: गैप कम किया */
+  }
+
+  .stakeholder-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* एक लाइन में 4 कार्ड */
+    gap: clamp(0.5rem, 1.5vmin, 1.5rem); /* बदला गया: गैप कम किया */
+    margin-top: 0;
+  }
+
+  .stakeholder-card-v2 {
+    background: white;
+    border-radius: 12px; /* थोड़ा कम किया */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stakeholder-card-v2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .stakeholder-card-v2 img {
+    width: 100%;
+    height: clamp(80px, 12vh, 120px); /* बदला गया: इमेज की ऊंचाई बहुत कम की */
+    object-fit: contain;
+  }
+
+  .stakeholder-card-v2 .content {
+    padding: clamp(0.5rem, 2vmin, 1rem); /* बदला गया: पैडिंग कम की */
+    flex-grow: 1;
+  }
+
+  .stakeholder-card-v2 h3 {
+    font-size: clamp(1rem, 2.2vmin, 1.3rem); /* बदला गया: फॉन्ट साइज कम किया */
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-gold);
+    padding-bottom: 0.25rem;
+    display: inline-block;
+  }
+
+  .stakeholder-card-v2 ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .stakeholder-card-v2 ul li {
+    display: flex;
+    align-items: flex-start;
+    font-size: clamp(0.7rem, 1.6vmin, 0.9rem); /* बदला गया: फॉन्ट साइज कम किया */
+    color: var(--text-light);
+    margin-bottom: 0.5rem; /* बदला गया: लाइन के बीच गैप कम किया */
+    line-height: 1.4;
+  }
+
+  .stakeholder-card-v2 ul li i {
+    color: var(--primary-gold);
+    font-size: 0.8rem;
+    width: 20px;
+    margin-top: 4px;
+    margin-right: 0.5rem;
+  }
+  
+  /* ==========================================================================
+   Page 9 (Section 8): Achievements - REVISED TO FIT SCREEN
+   ========================================================================== */
+
+  .section:nth-child(9) { 
+    background-image: url('images/achivements.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .achievements-container-v2 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+  }
+
+  .achievements-container-v2 .section-header {
+      margin-bottom: clamp(1rem, 3vh, 2rem);
+  }
+
+  .achievements-container-v2 .section-header .section-title,
+  .achievements-container-v2 .section-header .section-subtitle {
+      color: #333; /* गहरे रंग की बैकग्राउंड पर टेक्स्ट का रंग बदला */
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* पठनीयता के लिए शैडो */
+  }
+
+  /* हेडर के लिए एक सेमी-ट्रांसपेरेंट बैकग्राउंड बॉक्स */
+  .section:nth-child(9) .section-header {
+    background-color: rgba(0, 0, 0, 0.4); /* हल्का डार्क बैकग्राउंड */
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  /* उस बॉक्स के अंदर के टेक्स्ट को सफेद करना */
+  .section:nth-child(9) .section-header .section-title,
+  .section:nth-child(9) .section-header .section-subtitle {
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* डार्क शैडो ताकि टेक्स्ट और उभरे */
+  }
+
+  /* मुख्य हाइलाइट बार */
+  .contribution-bar {
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+    color: white;
+    border-radius: 12px;
+    padding: clamp(0.75rem, 2vmin, 1.25rem); /* बदला गया: पैडिंग कम की */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: clamp(1rem, 3vh, 2rem); /* बदला गया: गैप कम किया */
+    box-shadow: 0 8px 25px rgba(27, 94, 32, 0.25);
+  }
+
+  .bar-icon {
+    font-size: clamp(1.5rem, 4vmin, 2rem); /* बदला गया: आइकॉन छोटा किया */
+  }
+
+  .contribution-bar p {
+    flex-grow: 1;
+    font-size: clamp(0.9rem, 2.2vmin, 1.1rem); /* बदला गया: फॉन्ट रेस्पॉन्सिव */
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .bar-number {
+    font-size: clamp(1.5rem, 4vmin, 2.2rem); /* बदला गया: फॉन्ट रेस्पॉन्सिव */
+    font-weight: 700;
+  }
+
+  /* उपलब्धियों का ग्रिड */
+  .achievements-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: clamp(0.75rem, 2vmin, 1.5rem); /* बदला गया: गैप कम किया */
+  }
+
+  .stat-card-v3 {
+    background: rgba(255, 255, 255, 0.9); /* हल्का ट्रांसपेरेंट बैकग्राउंड */
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    padding: clamp(0.75rem, 2vmin, 1.25rem); /* बदला गया: पैडिंग कम की */
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border-bottom: 4px solid var(--primary-gold);
+    transition: all 0.3s ease;
+  }
+
+  .stat-card-v3:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  .stat-card-v3 .stat-icon {
+    font-size: clamp(1.8rem, 4vmin, 2.2rem); /* बदला गया: आइकॉन छोटा किया */
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-card-v3 .stat-info {
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-card-v3 .stat-number {
+    font-size: clamp(1.8rem, 5vmin, 2.5rem); /* बदला गया: नंबर छोटा किया */
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  .stat-card-v3 .stat-unit {
+    font-size: clamp(0.9rem, 2vmin, 1.1rem); /* बदला गया: यूनिट टेक्स्ट छोटा किया */
+    color: var(--text-light);
+    margin-left: 0.25rem;
+  }
+
+  .stat-card-v3 .stat-label {
+    font-size: clamp(0.8rem, 1.8vmin, 0.95rem); /* बदला गया: लेबल टेक्स्ट छोटा किया */
+    color: var(--text-light);
+    line-height: 1.3;
+  }
+  
+  /* ==========================================================================
+     Page 10 (Section 9): Data Collection
+     ========================================================================== */
+  .section:nth-child(10) { 
+      background: #E0F7FA; 
+  }
+  
+  /* This page uses generic .content-card component */
+  
+  /* ==========================================================================
+   Page 11 (Section 10): Data Integration - REVISED TO FIT SCREEN
+   ========================================================================== */
+
+  .section:nth-child(11) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/data-integration-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .integration-container {
+      width: 100%;
+      max-width: 1300px;
+      padding: 1rem;
+  }
+
+  .integration-container .section-title,
+  .integration-container .section-subtitle {
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .integration-container .section-header {
+      margin-bottom: clamp(1rem, 4vh, 2rem);
+  }
+
+  .integration-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2rem); /* बदला गया */
+    margin-top: 0;
+  }
+
+  .data-hub {
+    /* बदला गया: साइज को रेस्पॉन्सिव बनाया */
+    width: clamp(180px, 28vmin, 220px);
+    height: clamp(180px, 28vmin, 220px);
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+  }
+
+  .hub-icon {
+    font-size: clamp(2rem, 5vmin, 2.5rem); /* बदला गया */
+    margin-bottom: 0.5rem;
+  }
+
+  .data-hub h3 {
+    font-size: clamp(1.2rem, 3vmin, 1.8rem); /* बदला गया */
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+
+  .data-hub p {
+    font-size: clamp(0.8rem, 2vmin, 0.9rem); /* बदला गया */
+    opacity: 0.9;
+  }
+
+  .departments-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 2vmin, 1.5rem); /* बदला गया */
+  }
+
+  .dept-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .dept-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .dept-image {
+    height: clamp(70px, 12vh, 100px); /* बदला गया: इमेज की ऊंचाई कम की */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .dept-content {
+    padding: clamp(0.75rem, 2vmin, 1.25rem); /* बदला गया */
+    position: relative;
+  }
+
+  .dept-icon {
+    position: absolute;
+    top: -25px;
+    right: 15px;
+    width: clamp(40px, 6vmin, 50px);
+    height: clamp(40px, 6vmin, 50px);
+    background: var(--primary-gold);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.2rem, 2.5vmin, 1.5rem);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .dept-content h4 {
+    font-size: clamp(1rem, 2.5vmin, 1.2rem); /* बदला गया */
+    color: var(--primary-green);
+    margin-bottom: 0.25rem;
+  }
+
+  .dept-content p {
+    font-size: clamp(0.8rem, 1.8vmin, 0.9rem); /* बदला गया */
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* रेस्पॉन्सिव डिज़ाइन */
+  @media (max-width: 992px) {
+    .integration-layout {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .departments-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+    
+  /* ==========================================================================
+     Page 12 (Section 11): Future Technology
+     ========================================================================== */
+  .content-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  
+  .card-content {
+    color: var(--text-light);
+    line-height: 1.8;
+  }
+  
+  /* ==========================================================================
+   Page 13 (Section 12): Challenges - REVISED TO FIT SCREEN
+   ========================================================================== */
+
+.section:nth-child(13) {
+  background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/challenges-bg.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 1rem;
+}
+
+.challenge-solution-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.challenge-solution-container .section-header {
+    margin-bottom: clamp(1rem, 3vh, 2rem); /* बदला गया */
+}
+
+.challenge-solution-container .section-title,
+.challenge-solution-container .section-subtitle {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* मुख्य लेआउट */
+.cs-layout {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* कॉलम की ऊंचाई बराबर रखें */
+  gap: clamp(1rem, 2vw, 2rem); /* बदला गया */
+  margin-top: 0;
+  width: 100%;
+}
+
+.cs-column {
+  flex: 1;
+  display: flex; /* जोड़ा गया */
+  flex-direction: column; /* जोड़ा गया */
+  gap: clamp(0.5rem, 1.5vh, 1rem); /* बदला गया: कार्ड्स के बीच गैप */
+}
+
+.cs-column h3 {
+  font-size: clamp(1.2rem, 3vmin, 1.6rem); /* बदला गया */
+  text-align: center;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.challenges h3 {
+  border-bottom: 3px solid #E57373;
+}
+.solutions h3 {
+  border-bottom: 3px solid #81C784;
+}
+
+/* जानकारी वाले कार्ड्स का स्टाइल */
+.cs-card {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: clamp(0.5rem, 2vmin, 1rem);
+  flex-grow: 1; /* बदला गया: ताकि कार्ड्स उपलब्ध जगह में फैल जाएं */
+  transition: background 0.3s ease;
+  margin-bottom: 0; /* हटाया गया: अब गैप column पर है */
+}
+
+.cs-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.cs-icon {
+  font-size: clamp(1.5rem, 3.5vmin, 2rem); /* बदला गया */
+  width: 50px;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.challenges .cs-icon { color: #E57373; }
+.solutions .cs-icon { color: #81C784; }
+
+.cs-text h4 {
+  font-size: clamp(0.9rem, 2.2vmin, 1.1rem); /* बदला गया */
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+.cs-text p {
+  font-size: clamp(0.75rem, 1.8vmin, 0.9rem); /* बदला गया */
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+}
+
+/* बीच की Arrows */
+.cs-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-gold);
+  font-size: clamp(1.5rem, 3vmin, 2rem); /* बदला गया */
+  opacity: 0.7;
+  gap: 10vh; /* एरो के बीच वर्टिकल गैप */
+}
+
+/* मोबाइल के लिए रेस्पॉन्सिव डिज़ाइन */
+@media (max-width: 992px) {
+  .cs-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .cs-bridge {
+    flex-direction: row;
+    transform: rotate(90deg);
+    margin: 1rem 0;
+    gap: 2rem;
+  }
+  .cs-column {
+      width: 100%;
+      max-width: 600px;
+  }
+}
+  
+  /* ==========================================================================
+     Page 14 (Section 13): Economic Impact
+     ========================================================================== */
+  .section:nth-child(14) {
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/back.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2rem;
+  }
+  
+  /* This page uses the generic .stats-grid component */
+  
+  /* ==========================================================================
+     Page 15 (Section 14): Success Stories
+     ========================================================================== */
+  .section:nth-child(15) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/success-bg.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 4rem 0;
+  }
+  
+  .success-stories-section .section-title {
+      color: white;
+      text-align: center;
+      margin-bottom: 3rem;
+  }
+  
+  .success-stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+  }
+  
+  .story-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .profile-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 1.5rem;
+      border: 3px solid var(--accent-green);
+  }
+  
+  .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+  
+  .story-card h3 {
+      margin-bottom: 1rem;
+      color: var(--primary-gold);
+      font-size: 1.5rem;
+  }
+  
+  .story-card p {
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .story-author {
+      font-size: 0.9rem;
+      color: var(--accent-green);
+      font-weight: 500;
+  }
+  
+  /* ==========================================================================
+     Page 16 (Section 15): Contact Information
+     ========================================================================== */
+  .section:nth-child(16) {
+    background-image: url('images/last_page.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 4rem 0;
+  }
+  
+  .contact-container {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  
+  .contact-info {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .contact-card {
+    background: var(--surface-white);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px var(--shadow-light);
+    width: calc(50% - 0.75rem);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px var(--shadow-medium);
+  }
+  
+  .contact-icon {
+    font-size: 2rem;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+  }
+  
+  .contact-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+  }
+  
+  .contact-detail {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+  
+  .social-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .social-icon {
+    font-size: 1.5rem;
+    color: var(--primary-green);
+    transition: color 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    color: var(--accent-green);
+  }
+  
+  .contact-map {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow-light);
+  }
+  
+  .contact-map iframe {
+    border: 0;
+    height: 100%;
+  }
+  
+  
+  /****************************************************************************
+     UTILITY, RESPONSIVE & PRINT STYLES
+   ****************************************************************************/
+  
+  /* ==========================================================================
+     UTILITY & MISCELLANEOUS
+     ========================================================================== */
+  .back-btn {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    background: var(--primary-green);
+    color: var(--surface-white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    transition: background 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background: var(--accent-green);
+  }
+  
+  .back-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* Animations */
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .section.in-view .timeline-item { animation: fadeInLeft 0.5s ease forwards; }
+  .section.in-view .flow-item { animation: fadeInUp 0.5s ease forwards; }
+  
+  
+  /* ==========================================================================
+     RESPONSIVE DESIGN (for Mobile)
+     ========================================================================== */
+  @media (max-width: 768px) or (max-height: 650px) {
+    .navbar { padding: 0 1rem; }
+    .nav-brand span { display: none; }
+    .main-title { font-size: 2.5rem; }
+    .subtitle { font-size: 1.2rem; }
+    .vision-mission {grid-template-columns: 1fr; width: 80%; gap: 1rem; margin: 0 auto 1rem;}
+    .mp-map {display: none; /* हटाया गया: यह लेआउट को सरल बनाता है */ }
+    .back-btn { left: 1rem; padding: 0.5rem 1rem; }
+    .section { padding: 1rem; }
+    .content-section { padding: 1rem; }
+    .toc-grid, .toc-visual-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .flowchart { flex-direction: column; align-items: center; }
+    .flow-item { width: 100%; max-width: 400px; }
+    .flow-item:not(:last-child)::after {
+      content: '\2193'; top: auto; bottom: -2rem; left: 50%; transform: translateX(-50%);
+    }
+    .tech-grid { grid-template-columns: 1fr; }
+    .tech-card { width: 100%; }
+    .contact-container { flex-direction: column; }
+    .contact-card { width: 100%; }
+    .contact-map { height: 200px; }
+    .problem-card { flex-direction: column; }
+    .problem-image { width: 100%; height: 150px; flex: none; }
+  }
+  
+  /* ==========================================================================
+     PRINT STYLES
+     ========================================================================== */
+  /* ==========================================================================
+   PRINT STYLES - UPDATED TO FIX OVERFLOW AND BACKGROUND ISSUES
+   ========================================================================== */
+@media print {
+  @page {
+    size: landscape;
+    margin: 0.5cm; /* Using a small margin is safer than zero */
+  }
+
+  /* --- General Setup --- */
+  body {
+    background: white !important; /* Force a plain white background */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .navbar, .progress-bar, .back-btn, .print-btn, .nav-controls, .menu-btn, .modal {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-top: 0 !important;
+  }
+
+  /* --- Universal Section Styling for Print --- */
+  .section {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    page-break-after: always;
+    padding: 1rem;
+    height: auto !important; /* Most important fix: remove vh dependency */
+    min-height: initial !important; /* Reset min-height */
+    overflow: hidden !important; /* Prevents content from spilling */
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+  }
+
+  .section:last-child {
+    page-break-after: avoid;
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  /* --- Page 1 (Home): Background Fix --- */
+  .section:nth-child(1), .front-page {
+    background: linear-gradient(135deg, var(--primary-green) 0%, #2E7D32 50%, var(--primary-gold) 100%) !important;
+    color: white !important;
+  }
+  .front-page::before {
+    background: rgba(0, 0, 0, 0.3) !important;
+  }
+  .vision-box, .mission-box {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  .main-title, .subtitle {
+    text-shadow: none !important;
+  }
+
+  /* --- Page 2 (TOC): Content Overflow Fix --- */
+  .section:nth-child(2) {
+    padding-bottom: 2rem; /* Add padding if needed */
+  }
+  .section:nth-child(2) .toc-visual-grid {
+    gap: 0.5rem; /* Reduce gap between items */
+  }
+  .section:nth-child(2) .toc-visual-item {
+    padding: 0.5rem; /* Reduce padding inside items */
+  }
+  .section:nth-child(2) .toc-visual-item h3 {
+    font-size: 0.9rem; /* Reduce font size */
+  }
+  .section:nth-child(2) .toc-visual-item p {
+    font-size: 0.7rem; /* Reduce font size */
+  }
+  .section:nth-child(2) .toc-visual-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  /* --- Page 2 (TOC): REVISED Visibility and Alignment Fix for Print --- */
+  .section:nth-child(2) .toc-visual-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* बॉक्सेस को 5 कॉलम में व्यवस्थित करें */
+    gap: 0.75rem; /* बॉक्सेस के बीच गैप */
+    width: 100%;
+    max-width: 27cm; /* प्रिंट पेज पर अधिकतम चौड़ाई सेट करें */
+    margin: 0 auto; /* ग्रिड को पेज के सेंटर में रखें */
+  }
+
+  .section:nth-child(2) .toc-visual-item {
+    background: #ffffff !important; /* बैकग्राउंड को सॉलिड सफेद करें */
+    border: 1px solid #dddddd !important; /* हल्का बॉर्डर दें */
+    backdrop-filter: none !important; /* प्रिंट में ब्लर इफेक्ट हटाएं */
+  }
+
+  /* --- टेक्स्ट को डार्क और पढ़ने योग्य बनाएं --- */
+  .section:nth-child(2) .toc-visual-item h3,
+  .section:nth-child(2) .toc-visual-item p {
+    color: #212121 !important; /* टेक्स्ट का रंग गहरा करें */
+    text-shadow: none !important; /* टेक्स्ट शैडो हटाएं */
+  }
+
+  /* --- Page 3 (Introduction): Overflow and Image Fix --- */
+  .section:nth-child(3) .intro-container {
+    display: block; /* Change grid to simple block layout for printing */
+    height: auto;
+  }
+  .section:nth-child(3) .intro-content,
+  .section:nth-child(3) .importance-section {
+    width: 100%;
+    float: none; /* Disable complex positioning */
+  }
+  .section:nth-child(3) .intro-image {
+    height: 200px; /* Give a fixed height to the image container */
+    margin-top: 1rem;
+  }
+  .section:nth-child(3) .intro-image img {
+    display: block !important; /* Ensure image is visible */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .section:nth-child(3) .importance-grid {
+    flex-direction: row; /* Stack cards horizontally if possible */
+  }
+
+  /* --- Page 6 (Technology Base): Overflow Fix --- */
+  .section:nth-child(6) .tech-stack-container {
+    transform: scale(0.7); /* Scale down the entire graphic to fit */
+    height: 420px; /* Reduce container height after scaling */
+    width: 420px;
+  }
+  .section:nth-child(6) .tech-page-layout {
+    gap: 0;
+  }
+
+  /* --- Page 11 (Data Integration): Overflow Fix --- */
+  .section:nth-child(11) .integration-layout {
+    flex-direction: column; /* Stack items vertically */
+    gap: 1rem;
+  }
+  .section:nth-child(11) .departments-grid {
+    grid-template-columns: 1fr 1fr; /* Keep the 2-column grid */
+  }
+  .section:nth-child(11) .dept-image {
+    height: 70px; /* Reduce image height */
+  }
+  .section:nth-child(11) .data-hub {
+    margin-bottom: 1rem;
+  }
+
+  /* --- Page 11 (Data Integration): REVISED Print Layout Fix --- */
+  .section:nth-child(11) .integration-layout {
+    display: grid; /* Layout को फ्लेक्स से ग्रिड में बदलें */
+    grid-template-columns: 200px 1fr; /* पहला कॉलम गोले के लिए, दूसरा बाकी कार्ड्स के लिए */
+    grid-template-rows: auto; /* पंक्तियों की ऊंचाई कंटेंट के अनुसार */
+    align-items: center; /* आइटम्स को वर्टिकली सेंटर करें */
+    gap: 1.5rem; /* ग्रिड आइटम्स के बीच गैप */
+    width: 100%;
+    flex-direction: row; /* यह सुनिश्चित करें कि लेआउट पंक्ति में हो */
+  }
+
+  .section:nth-child(11) .data-hub {
+    /* गोले को ग्रिड के पहले कॉलम में रखने के लिए */
+    width: 180px; /* गोले का आकार थोड़ा छोटा करें */
+    height: 180px;
+    margin-bottom: 0; /* नीचे का मार्जिन हटाएं */
+  }
+  
+  .section:nth-child(11) .data-hub h3 {
+    font-size: 1.2rem; /* गोले के अंदर फॉन्ट छोटा करें */
+  }
+
+  .section:nth-child(11) .departments-grid {
+    /* चारों कार्ड्स ग्रिड के दूसरे कॉलम में रहेंगे */
+    margin-top: 0; /* ऊपर का मार्जिन हटाएं */
+  }
+
+  /* --- Page 13 (Challenges): Overflow Fix --- */
+  .section:nth-child(13) .cs-layout {
+    gap: 1rem; /* Reduce gap */
+  }
+  .section:nth-child(13) .cs-bridge {
+    display: none; /* Hide the arrows for cleaner print */
+  }
+  .section:nth-child(13) .cs-column {
+    gap: 0.5rem;
+  }
+  .section:nth-child(13) .cs-card {
+    padding: 0.5rem;
+  }
+
+  /* --- Page 13 (Challenges & Solutions): REVISED Side-by-Side Print Layout --- */
+  .section:nth-child(13) .cs-layout {
+    display: grid; /* Layout को स्थिर दो-कॉलम ग्रिड में बदलें */
+    grid-template-columns: 1fr 1fr; /* दो बराबर चौड़ाई वाले कॉलम */
+    align-items: start; /* कंटेंट को ऊपर से शुरू करें */
+    gap: 1.5rem; /* दोनों कॉलम के बीच की दूरी */
+    width: 100%;
+  }
+
+  .section:nth-child(13) .cs-bridge {
+    display: none; /* बीच के तीर छिपाएं */
+  }
+  
+  .section:nth-child(13) .cs-column h3 {
+    font-size: 1.2rem; /* कॉलम टाइटल का फॉन्ट थोड़ा कम करें */
+    margin-bottom: 0.5rem;
+  }
+  
+  .section:nth-child(13) .cs-card {
+    padding: 0.75rem; /* कार्ड के अंदर की पैडिंग कम करें */
+  }
+
+  .section:nth-child(13) .cs-text h4 {
+    font-size: 0.9rem; /* कार्ड के अंदर के टेक्स्ट का साइज कम करें */
+  }
+
+  .section:nth-child(13) .cs-text p {
+    font-size: 0.8rem;
+  }
+
+  /* --- General Component fixes for Print --- */
+  .content-card, .stat-card, .story-card, .tech-card, .contact-card {
+    box-shadow: none !important;
+    border: 1px solid var(--border-light);
+    background: var(--surface-white) !important;
+  }
+}
