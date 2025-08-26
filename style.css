@@ -361,7 +361,7 @@
    ****************************************************************************/
   
   /* ==========================================================================
-   Page 1 (Section 0): Home Page
+   Page 1 (Section 1): Home Page
    ========================================================================== */
   .section:nth-child(1) { 
     background: linear-gradient(135deg, var(--primary-green) 0%, #2E7D32 50%, var(--primary-gold) 100%); 
@@ -497,7 +497,7 @@
   }
   
 /* ==========================================================================
-   Page 2 (Section 1): Table of Contents
+   Page 2 (Section 2): Table of Contents
    ========================================================================== */
    .section:nth-child(2) { 
     background-image: url('images/toc-background.jpg');
@@ -582,7 +582,7 @@
   }
   
   /* ==========================================================================
-   Page 3 (Section 2): Introduction 
+   Page 3 (Section 3): Introduction 
     ========================================================================== */
   .section:nth-child(3) {
     background-color: #f5f7f5;
@@ -733,11 +733,9 @@
   }
  
   /* ==========================================================================
-   Page 4 (Section 3): Before DCS - NEW 2-COLUMN LAYOUT
+   Page 4 (Section 4): Before DCS 
    ========================================================================== */
-/* ==========================================================================
-   Page 4 (Section 3): Before DCS - NEW 4-COLUMN HORIZONTAL LAYOUT
-   ========================================================================== */
+
    .section:nth-child(4) {
     background-image: url('images/old-farming.jpg');
     background-size: cover;
@@ -819,7 +817,7 @@
   }
   
 /* ==========================================================================
-   Page 5 (Section 4): Development Journey - REVISED TO FIT SCREEN
+   Page 5 (Section 5): Development Journey 
    ========================================================================== */
    .section:nth-child(5) {
     background-image: url('images/vikash_yatra_background.png');
@@ -990,7 +988,7 @@
   .point-9 { left: 93%; }
   
   /* ==========================================================================
-   Page 6 (Section 5): Technology Base - REFINED
+   Page 6 (Section 6): Technology Base 
    ========================================================================== */
 .section:nth-child(6) {
   background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/tech-background.jpg');
@@ -1190,7 +1188,7 @@
 }
   
   /* ==========================================================================
-     Page 7 (Section 6): Process Flow
+     Page 7 (Section 7): Process Flow
      ========================================================================== */
   .section:nth-child(7) { 
     background-image: url('images/DCS_process_page.png');
@@ -1269,7 +1267,7 @@
   }
   
   /* ==========================================================================
-   Page 8 (Section 7): Stakeholders - REVISED TO FIT SCREEN
+   Page 8 (Section 8): Stakeholders - REVISED TO FIT SCREEN
    ========================================================================== */
 
   .section:nth-child(8) {
@@ -1356,7 +1354,7 @@
   }
   
   /* ==========================================================================
-   Page 9 (Section 8): Achievements - REVISED TO FIT SCREEN
+   Page 9 (Section 9): Achievements 
    ========================================================================== */
 
   .section:nth-child(9) { 
@@ -1481,16 +1479,93 @@
   }
   
   /* ==========================================================================
-     Page 10 (Section 9): Data Collection
+     Page 10 (Section 10): SAARA App - Advanced Features
      ========================================================================== */
-  .section:nth-child(10) { 
-      background: #E0F7FA; 
+
+   .saara-features-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/saara-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
+  .saara-features-section .section-title,
+  .saara-features-section .section-subtitle {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  .features-container {
+    width: 100%;
+    max-width: 1300px;
+    padding: 1rem;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2x2 Grid Layout */
+    grid-template-rows: repeat(2, 1fr);
+    gap: clamp(1.5rem, 3vw, 2rem);
+    height: clamp(400px, 60vh, 550px); /* Grid की ऊंचाई को कंट्रोल करें */
+  }
+  
+  .feature-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex; /* Image और content को साइड-बाई-साइड रखने के लिए */
+    transition: all 0.3s ease;
+  }
+  
+  .feature-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .feature-image {
+    width: 45%; /* इमेज बॉक्स की चौड़ाई */
+    flex-shrink: 0;
+  }
+  
+  .feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .feature-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+  }
+  
+  .feature-icon {
+    font-size: 2rem;
+    color: var(--primary-gold);
+    margin-bottom: 1rem;
+  }
+  
+  .feature-content h3 {
+    font-size: clamp(1.1rem, 2.5vmin, 1.4rem);
+    margin-bottom: 0.75rem;
+  }
+  
+  .feature-content p {
+    font-size: clamp(0.85rem, 2vmin, 0.95rem);
+    opacity: 0.9;
+    line-height: 1.5;
+  }  
   /* This page uses generic .content-card component */
   
   /* ==========================================================================
-   Page 11 (Section 10): Data Integration - REVISED TO FIT SCREEN
+   Page 11 (Section 11): Data Integration 
    ========================================================================== */
 
   .section:nth-child(11) {
@@ -1631,34 +1706,108 @@
   }
     
   /* ==========================================================================
-     Page 12 (Section 11): Future Technology
+     Page 12 (Section 12): Real-time Dashboard & Analytics
      ========================================================================== */
-  .content-grid {
-    display: grid;
-    gap: 2rem;
-    margin-bottom: 2rem;
+
+
+  .section:nth-child(12) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/real_time_dashboard_background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.85);
+  } 
+  .section:nth-child(12) .section-title,
+  .section:nth-child(12) .section-subtitle {
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
   }
   
-  .card-header {
+  .dashboard-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+    padding: 1rem;
+  }
+  
+  .dashboard-container .section-header {
+    margin-bottom: clamp(1.5rem, 4vh, 2rem);
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+    gap: clamp(1rem, 2vw, 1.5rem);
+    height: clamp(350px, 50vh, 450px); /* Control the height of the grid */
+  }
+  
+  .dashboard-card {
+    background: var(--surface-white);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    border-bottom-color: var(--primary-green);
+  }
+  
+  .dashboard-card img {
+    width: 100%;
+    height: 55%; /* Image takes the top 55% of the card */
+    object-fit: cover;
+    opacity: 0.9;
+  }
+  
+  .dashboard-card .card-content {
+    padding: 1rem;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .dashboard-card .card-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-gold);
+    color: white;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .card-title {
+    justify-content: center;
     font-size: 1.5rem;
-    font-weight: 600;
+    position: absolute;
+    top: -25px; /* Position icon halfway over the image */
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid white;
+  }
+  
+  .dashboard-card h4 {
+    font-size: clamp(1rem, 2.5vmin, 1.2rem);
     color: var(--text-dark);
+    margin-top: 20px; /* Space for the icon */
+    margin-bottom: 0.5rem;
   }
   
-  .card-content {
+  .dashboard-card p {
+    font-size: clamp(0.8rem, 2vmin, 0.9rem);
     color: var(--text-light);
-    line-height: 1.8;
+    line-height: 1.4;
   }
-  
+
   /* ==========================================================================
-   Page 13 (Section 12): Challenges - REVISED TO FIT SCREEN
+   Page 13 (Section 13): Challenges 
    ========================================================================== */
 
 .section:nth-child(13) {
@@ -1792,23 +1941,72 @@
 }
   
   /* ==========================================================================
-     Page 14 (Section 13): Economic Impact
+     Page 14 (Section 14): Economic Impact
      ========================================================================== */
-  .section:nth-child(14) {
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/back.png');
+  .economic-impact-section {
+    background-image: linear-gradient(rgba(27, 94, 32, 0.85), rgba(27, 94, 32, 0.85)), url('images/back.png');
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .economic-impact-section .section-title,
+  .economic-impact-section .section-subtitle {
     color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .economic-impact-section .stats-grid {
+    grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .economic-impact-section .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
     padding: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .economic-impact-section .stat-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  }
+
+  .economic-impact-section .stat-icon {
+    font-size: 3rem;
+    color: var(--primary-gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .economic-impact-section .stat-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+
+  .economic-impact-section .stat-label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
   }
   
   /* This page uses the generic .stats-grid component */
   
   /* ==========================================================================
-     Page 15 (Section 14): Success Stories
+     Page 15 (Section 15): Success Stories
      ========================================================================== */
   .section:nth-child(15) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/success-bg.png');
@@ -1883,7 +2081,7 @@
   }
   
   /* ==========================================================================
-     Page 16 (Section 15): Contact Information
+     Page 16 (Section 16): Contact Information
      ========================================================================== */
   .section:nth-child(16) {
     background-image: url('images/last_page.png');
@@ -2054,9 +2252,7 @@
   /* ==========================================================================
      PRINT STYLES
      ========================================================================== */
-  /* ==========================================================================
-   PRINT STYLES - UPDATED TO FIX OVERFLOW AND BACKGROUND ISSUES
-   ========================================================================== */
+
 @media print {
   @page {
     size: landscape;
